@@ -8,6 +8,7 @@ import qualified Church
 import qualified Codensity
 import qualified NoRemorse
 import qualified Freer
+import qualified FreeViaDefer
 import Control.Monad
 import qualified Control.Monad.State.Strict as MTL
 
@@ -29,6 +30,7 @@ benchmarks computation mtlComputation n =
   , bench "Codensity" $ nf (flip Codensity.run 0 . computation) n
   , bench "NoRemorse" $ nf (flip NoRemorse.run 0 . computation) n
   , bench "Freer" $ nf (flip Freer.run 0 . computation) n
+  , bench "Free/defer" $ nf (flip FreeViaDefer.run 0 . computation) n
   , bench "MTL" $ nf (flip MTL.runState 0 . mtlComputation) n
   ]
 
